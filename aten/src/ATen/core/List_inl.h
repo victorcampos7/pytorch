@@ -179,6 +179,21 @@ void ListPtr<T>::push_back(T&& value) const {
 }
 
 template<class T>
+void ListPtr<T>::append(ListPtr<T> b) const {
+  size_type neededSize = this->size() + b.size();
+  if (impl_->list.capacity() < neededSize) {
+    this->reserve(std::max(impl_->list.capacity() * 2, neededSize));
+  }
+  if (b.use_count() == 1) {
+    std::move(b.begin(), b.end(), this->begin());
+  } else {
+    for (const auto& el: b) {
+      this->push_back(el);
+    }
+  }
+}
+
+template<class T>
 template<class... Args>
 void ListPtr<T>::emplace_back(Args&&... args) const {
   // TODO Use list_element_from?
