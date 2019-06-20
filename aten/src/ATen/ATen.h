@@ -22,6 +22,6 @@
 #include <c10/core/Layout.h>
 #include <ATen/core/Scalar.h>
 #include <c10/core/Storage.h>
-#include <c10/core/TensorOptions.h>
+#include <ATen/TensorOptions.h>
 #include <c10/util/Exception.h>
 #include <ATen/core/ATenDispatch.h>
